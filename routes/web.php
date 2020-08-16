@@ -29,4 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts/{post}/edit', 'PostController@edit')->name('post.edit');
     Route::delete('/admin/posts/{post}/destroy', 'PostController@destroy')->name('post.destroy');
     Route::patch('/admin/posts/{post}/update', 'PostController@update')->name('post.update');
+    Route::get('/admin/users/{user}/profile', 'UserController@show')->name('user.profile.show');
+    Route::put('/admin/users/{user}/update', 'UserController@update')->name('user.profile.update');
+    Route::get('/admin/users', 'UserController@index')->name('user.index');
+    Route::delete('/admin/users/{user}/destroy', 'UserController@destroy')->name('user.destroy');
 });
