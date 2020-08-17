@@ -29,8 +29,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts/{post}/edit', 'PostController@edit')->name('post.edit');
     Route::delete('/admin/posts/{post}/destroy', 'PostController@destroy')->name('post.destroy');
     Route::patch('/admin/posts/{post}/update', 'PostController@update')->name('post.update');
-    Route::get('/admin/users/{user}/profile', 'UserController@show')->name('user.profile.show');
+
     Route::put('/admin/users/{user}/update', 'UserController@update')->name('user.profile.update');
-    Route::get('/admin/users', 'UserController@index')->name('user.index');
+    Route::put('/admin/users/{user}/attach', 'UserController@attach')->name('user.role.attach');
+    Route::put('/admin/users/{user}/detach', 'UserController@detach')->name('user.role.detach');
+
     Route::delete('/admin/users/{user}/destroy', 'UserController@destroy')->name('user.destroy');
+
+    Route::get('/admin/roles', 'RoleController@index')->name('role.index');
+    Route::get('/admin/permissions', 'PermissionController@index')->name('permission.index');
+});
+
+Route::middleware(['role:Admin', 'auth'])->group(function () {
+    Route::get('/admin/users', 'UserController@index')->name('user.index');
+});
+
+Route::middleware(['can:view,user'])->group(function () {
+    Route::get('/admin/users/{user}/profile', 'UserController@show')->name('user.profile.show');
 });
