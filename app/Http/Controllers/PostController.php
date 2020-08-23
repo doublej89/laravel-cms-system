@@ -66,4 +66,14 @@ class PostController extends Controller
         $request->session()->flash('post-deleted-message', 'Post has been deleted');
         return back();
     }
+
+    public function attach(Post $post) {
+        $post->categories()->attach(request('category'));
+        return back();
+    }
+
+    public function detach(Post $post) {
+        $post->categories()->detach(request('category'));
+        return back();
+    }
 }

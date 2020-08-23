@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts', 'PostController@index')->name('post.index');
     Route::post('/admin/posts', 'PostController@store')->name('post.store');
 
+    Route::put('/admin/posts/{post}/attach', 'PostController@attach')->name('post.category.attach');
+    Route::put('/admin/posts/{post}/detach', 'PostController@detach')->name('post.category.detach');
+
     Route::get('/admin/posts/{post}/edit', 'PostController@edit')->name('post.edit');
     Route::delete('/admin/posts/{post}/destroy', 'PostController@destroy')->name('post.destroy');
     Route::patch('/admin/posts/{post}/update', 'PostController@update')->name('post.update');
@@ -59,6 +62,8 @@ Route::middleware(['role:Admin', 'auth'])->group(function () {
     Route::get('/admin/users', 'UserController@index')->name('user.index');
     Route::resource('admin/comments', 'CommentsController');
     Route::resource('admin/comment/replies', 'RepliesController');
+    Route::resource('admin/categories', 'CategoriesController');
+
 });
 
 Route::middleware(['can:view,user'])->group(function () {
