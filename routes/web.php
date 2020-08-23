@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/post/{post}', 'PostController@show')->name('post');
+Route::get('/post/{post}', 'PostController@show')->name('post.show');
 
 
 Route::middleware('auth')->group(function () {
@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['role:Admin', 'auth'])->group(function () {
     Route::get('/admin/users', 'UserController@index')->name('user.index');
+    Route::resource('admin/comments', 'CommentsController');
+    Route::resource('admin/comment/replies', 'RepliesController');
 });
 
 Route::middleware(['can:view,user'])->group(function () {
