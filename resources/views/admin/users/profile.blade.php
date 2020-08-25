@@ -58,6 +58,21 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                            type="text"
+                            name="job_title"
+                            class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}"
+                            id="job_title"
+                            value="{{$user->job_title ? $user->job_title : ''}}"
+                        >
+                        @error('job_title')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="password">Password</label>
                         <input
                             type="password"

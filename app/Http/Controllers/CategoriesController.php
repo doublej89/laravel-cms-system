@@ -33,55 +33,55 @@ class CategoriesController extends Controller
      */
     public function store()
     {
-        request()->validate(['name' => ['required']]);
+        request()->validate(['name' => ['required', 'unique:categories']]);
         Category::create([
-            'name' => Str::lower(request('name')),
+            'name' => request('name'),
         ]);
+        session()->flash('category-created', 'A new category created');
         return back();
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.categories.show', ['posts' => $category->posts, 'category' => $category]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', ['category' => $category, 'categories' => Category::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Category $category)
     {
-        //
+        $category->name = request('name');
+        if ($category->isDirty('name')) {
+            $category->save();
+            session()->flash('category-updated', 'Category update: '.request('name'));
+        } else {
+            session()->flash('category-updated', 'Nothing has been updated');
+        }
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        session()->flash('category-deleted', 'The category '.$category->name.' has been deleted');
+        return back();
     }
 }

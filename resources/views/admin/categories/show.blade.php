@@ -1,6 +1,6 @@
 <x-admin-master>
     @section('content')
-        <h1>All Posts</h1>
+        <h1>Posts for category: {{$category->name}}</h1>
         @if(session('post-deleted-message'))
             <div class="alert alert-danger">
                 {{session('post-deleted-message')}}
@@ -15,9 +15,9 @@
             </div>
         @endif
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Posts</h6>
-            </div>
+{{--            <div class="card-header py-3">--}}
+{{--                <h6 class="m-0 font-weight-bold text-primary">Posts for category: {{$category->name}}</h6>--}}
+{{--            </div>--}}
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -61,11 +61,11 @@
                                 <td>{{$post->updated_at->diffForHumans()}}</td>
                                 <td>
                                     @can('view', $post)
-                                    <form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
+                                        <form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
                                     @endcan
                                 </td>
                             </tr>

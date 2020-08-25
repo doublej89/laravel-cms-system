@@ -19,6 +19,7 @@
                             <th>Username</th>
                             <th>Avatar</th>
                             <th>Name</th>
+                            <th>Job Title</th>
                             <th>Registered At</th>
                             <th>Profile Updated At</th>
                             <th>Delete</th>
@@ -30,6 +31,7 @@
                             <th>Username</th>
                             <th>Avatar</th>
                             <th>Name</th>
+                            <th>Job Title</th>
                             <th>Registered At</th>
                             <th>Profile Updated At</th>
                             <th>Delete</th>
@@ -44,6 +46,7 @@
                                     <img height="40px" src="{{$user->avatar}}" alt="">
                                 </td>
                                 <td>{{$user->name}}</td>
+                                <td>{{$user->job_title}}</td>
                                 <td>{{$user->created_at->diffForHumans()}}</td>
                                 <td>{{$user->updated_at->diffForHumans()}}</td>
                                 <td>

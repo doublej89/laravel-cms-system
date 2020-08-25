@@ -18,6 +18,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/post/{post}', 'PostController@show')->name('post.show');
+Route::post('/search', 'SearchController@search')->name('search');
+Route::post('/admin//search', 'SearchController@adminSearch')->name('admin.search');
 
 
 Route::middleware('auth')->group(function () {
@@ -56,15 +58,21 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/admin/roles/{role}/attach', 'RoleController@attach')->name('role.permission.attach');
     Route::put('/admin/roles/{role}/detach', 'RoleController@detach')->name('role.permission.detach');
-});
 
-Route::middleware(['role:Admin', 'auth'])->group(function () {
     Route::get('/admin/users', 'UserController@index')->name('user.index');
     Route::resource('admin/comments', 'CommentsController');
     Route::resource('admin/comment/replies', 'RepliesController');
     Route::resource('admin/categories', 'CategoriesController');
 
 });
+
+//Route::middleware(['role:Admin', 'auth'])->group(function () {
+//    Route::get('/admin/users', 'UserController@index')->name('user.index');
+//    Route::resource('admin/comments', 'CommentsController');
+//    Route::resource('admin/comment/replies', 'RepliesController');
+//    Route::resource('admin/categories', 'CategoriesController');
+//
+//});
 
 Route::middleware(['can:view,user'])->group(function () {
     Route::get('/admin/users/{user}/profile', 'UserController@show')->name('user.profile.show');

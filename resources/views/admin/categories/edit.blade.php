@@ -5,22 +5,24 @@
                 <div class="alert alert-danger">
                     {{session('category-deleted')}}
                 </div>
-            @elseif(session()->has('category-created'))
+            @elseif(session()->has('category-updated'))
                 <div class="alert alert-success">
-                    {{session('category-created')}}
+                    {{session('category-updated')}}
                 </div>
             @endif
         </div>
         <div class="row">
             <div class="col-sm-3">
-                <form method="post" action="{{route('categories.store')}}">
+                <form method="post" action="{{route('categories.update', $category->id)}}">
                     @csrf
+                    @method('PATCH')
                     <div class="form-group">
                         <label for="name">Category</label>
                         <input
                             name="name"
                             id="name"
                             type="text"
+                            value="{{$category->name}}"
                             class="form-control @error('name') is-invalid @enderror"
                         >
                         <div>
@@ -29,7 +31,7 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Create Category</button>
+                    <button type="submit" class="btn btn-primary btn-block">Update Category</button>
                 </form>
             </div>
             <div class="col-sm-9">
