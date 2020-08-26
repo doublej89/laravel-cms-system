@@ -14,7 +14,10 @@ class UserController extends Controller
     }
 
     public function show(User $user) {
-        return view('admin.users.profile', ['user' => $user, 'roles' => Role::all()]);
+        if (request()->is('admin/*')) {
+            return view('admin.users.profile', ['user' => $user, 'roles' => Role::all()]);
+        }
+        return view('profile', ['user' => $user]);
     }
 
     public function update(User $user) {
