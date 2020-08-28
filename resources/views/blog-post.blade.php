@@ -6,13 +6,13 @@
         <!-- Author -->
         <p class="lead">
             by
-            <a href="#">{{$post->user->name}}</a>
+            <a href="{{route('user.profile', $post->user->id)}}">{{$post->user->name}}</a>
         </p>
 
         <hr>
 
         <!-- Date/Time -->
-        <p>Posted on {{$post->created_at->diffForHumans()}}</p>
+        <p>Posted on <a href="{{route('post.show', $post->id)}}">{{$post->created_at->diffForHumans()}}</a></p>
 
         <hr>
 
@@ -55,11 +55,11 @@
                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                 <div class="media-body">
                     <h5 class="mt-0">
-                        {{$comment->author}}
+                        <a href="{{route('user.profile', $comment->post->user->id)}}">{{$comment->author}}</a>
                         <small>{{$comment->created_at->diffForHumans()}}</small>
                     </h5>
                     {{$comment->body}}
-                    <button class="toggle-reply btn btn-primary pull-right">Reply</button>
+{{--                    <button class="toggle-reply btn btn-primary pull-right">Reply</button>--}}
                     <div class="replies-section">
                         @foreach($comment->replies as $reply)
                             <div class="media mt-4">
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         @endforeach
-                        <form method="post" action="{{route('replies.store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{route('replies.store')}}" class="mt-3" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="comment_id" value="{{$comment->id}}">
                             <div class="form-group">
@@ -111,6 +111,25 @@
 
 {{--            </div>--}}
 {{--        </div>--}}
+    @endsection
+
+    @section('categories-section')
+        <div class="card my-4">
+            <h5 class="card-header">Categories for this post</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled mb-0">
+                            @foreach($post->categories as $category)
+                                <li>
+                                    <a href="{{route('category.show', $category->id)}}">{{$category->name}}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endsection
 
     @section('scripts')

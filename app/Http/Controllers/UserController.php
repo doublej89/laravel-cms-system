@@ -22,13 +22,13 @@ class UserController extends Controller
 
     public function update(User $user) {
         $inputs = request()->validate([
-            'username' => ['required', 'string', 'max:255', 'unique:users', 'alpha_dash'],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,'.request('user_id'), 'alpha_dash'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'avatar' => ['file'],
         ]);
         if (request('avatar')) {
-            $inputs['avatar'] = request('avatar')->store('images');
+            $inputs['avatar'] = 'storage/'.request('avatar')->store('images');
         }
         $user->update($inputs);
         return back();

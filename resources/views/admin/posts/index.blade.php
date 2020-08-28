@@ -51,7 +51,11 @@
                                 <td>{{$post->id}}</td>
                                 <td>{{$post->user->name}}</td>
                                 <td>
-                                    <a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a>
+                                    @if(auth()->user()->id == $post->user->id)
+                                        <a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a>
+                                    @else
+                                        {{$post->title}}
+                                    @endif
                                 </td>
                                 <td>
                                     <img height="40px" src="{{$post->post_image}}" alt="">

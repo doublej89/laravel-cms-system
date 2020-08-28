@@ -19,8 +19,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/post/{post}', 'PostController@show')->name('post.show');
 Route::post('/search', 'SearchController@search')->name('search');
-Route::post('/admin//search', 'SearchController@adminSearch')->name('admin.search');
+Route::post('/admin/search', 'SearchController@adminSearch')->name('admin.search');
 Route::get('/users/{user}/profile', 'UserController@show')->name('user.profile');
+Route::get('/category/{category}', 'CategoriesController@show')->name('category.show');
 
 
 Route::middleware('auth')->group(function () {

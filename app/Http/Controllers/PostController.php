@@ -54,7 +54,10 @@ class PostController extends Controller
             'post_image' => 'file'
         ]);
         if (request('post_image')) {
-            $inputs['post_image'] = 'storage/'.request('post_image')->store('images');
+            $response = cloudinary()
+                ->upload(request()->file('post_image')->getRealPath())
+                ->getSecurePath();
+            $inputs['post_image'] = $response;
         }
         auth()->user()->posts()->create($inputs);
         session()->flash('post-created-message', 'Post has been created');

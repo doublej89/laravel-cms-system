@@ -47,7 +47,10 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $category = Category::findOrFail($id);
-        return view('admin.categories.show', ['posts' => $category->posts, 'category' => $category]);
+        if (request()->is('admin/*')) {
+            return view('admin.categories.show', ['posts' => $category->posts, 'category' => $category]);
+        }
+        return view('category', ['posts' => $category->posts()->paginate(5), 'category' => $category]);
     }
 
     /**

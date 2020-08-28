@@ -15,20 +15,42 @@
                 <a href="{{route('post.show', $post->id)}}" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
-                Posted on {{$post->created_at->diffForHumans()}}
-                <a href="#">Start Bootstrap</a>
+                Posted on <a href="{{route('post.show', $post->id)}}">{{$post->created_at->diffForHumans()}}</a>
             </div>
         </div>
         @endforeach
         <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
-            <li class="page-item">
-                <a class="page-link" href="#">&larr; Older</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="#">Newer &rarr;</a>
-            </li>
-        </ul>
+{{--        <ul class="pagination justify-content-center mb-4">--}}
+{{--            <li class="page-item">--}}
+{{--                <a class="page-link" href="#">&larr; Older</a>--}}
+{{--            </li>--}}
+{{--            <li class="page-item disabled">--}}
+{{--                <a class="page-link" href="#">Newer &rarr;</a>--}}
+{{--            </li>--}}
+{{--        </ul>--}}
+                <div class="d-flex">
+                    <div class="mx-auto">
+                        {{$posts->links()}}
+                    </div>
+                </div>
 
 @endsection
+    @section('categories-section')
+        <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled mb-0">
+                            @foreach($categories as $category)
+                            <li>
+                                <a href="{{route('category.show', $category->id)}}">{{$category->name}}</a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endsection
 </x-home-master>

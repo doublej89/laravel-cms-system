@@ -22,9 +22,7 @@
                 </div>
             </div>
         </div>
-        <h1 class="my-4">Page Heading
-            <small>Secondary Text</small>
-        </h1>
+        <h1 class="my-4">All posts by {{$user->name}}</h1>
 
         @foreach($user->posts as $post)
         <!-- Blog Post -->
@@ -36,8 +34,7 @@
                     <a href="{{route('post.show', $post->id)}}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
-                    Posted on {{$post->created_at->diffForHumans()}}
-                    <a href="#">Start Bootstrap</a>
+                    Posted on <a href="{{route('post.show', $post->id)}}">{{$post->created_at->diffForHumans()}}</a>
                 </div>
             </div>
         @endforeach

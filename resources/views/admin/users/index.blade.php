@@ -41,7 +41,13 @@
                         @foreach($users as $user)
                             <tr>
                                 <td>{{$user->id}}</td>
-                                <td><a href="{{route('user.profile.show', $user)}}">{{$user->username}}</a></td>
+                                <td>
+                                    @if(auth()->user()->id == $user->id)
+                                        <a href="{{route('user.profile.show', $user)}}">{{$user->username}}</a>
+                                    @else
+                                        {{$user->username}}
+                                    @endif
+                                </td>
                                 <td>
                                     <img height="40px" src="{{$user->avatar}}" alt="">
                                 </td>
@@ -50,11 +56,13 @@
                                 <td>{{$user->created_at->diffForHumans()}}</td>
                                 <td>{{$user->updated_at->diffForHumans()}}</td>
                                 <td>
-                                    <form method="post" action="{{route('user.destroy', $user->id)}}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
+                                    @if(auth()->user()->id == $user->id)
+                                        <form method="post" action="{{route('user.destroy', $user->id)}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

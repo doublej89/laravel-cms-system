@@ -6,6 +6,7 @@
                 <form method="post" action="{{route('user.profile.update', $user)}}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="user_id" value="{{$user->id}}">
                     <div class="mb-4">
                         <img class="img-profile rounded-circle" src="{{$user->avatar}}">
                     </div>
