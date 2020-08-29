@@ -28,7 +28,11 @@ class UserController extends Controller
             'avatar' => ['file'],
         ]);
         if (request('avatar')) {
-            $inputs['avatar'] = 'storage/'.request('avatar')->store('images');
+            $response = cloudinary()
+                ->upload(request()->file('avatar')->getRealPath())
+                ->getSecurePath();
+            $inputs['avatar'] = $response;
+//            $inputs['avatar'] = 'storage/'.request('avatar')->store('images');
         }
         $user->update($inputs);
         return back();

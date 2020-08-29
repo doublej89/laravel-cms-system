@@ -52,7 +52,7 @@
         <!-- Single Comment -->
         @foreach($post->comments as $comment)
             <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <img height="50px" class="d-flex mr-3 rounded-circle" src="{{$comment->avatar ? $comment->avatar : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"}}" alt="">
                 <div class="media-body">
                     <h5 class="mt-0">
                         <a href="{{route('user.profile', $comment->post->user->id)}}">{{$comment->author}}</a>
@@ -63,7 +63,7 @@
                     <div class="replies-section">
                         @foreach($comment->replies as $reply)
                             <div class="media mt-4">
-                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                                <img height="50px" class="d-flex mr-3 rounded-circle" src="{{$reply->avatar ? $reply->avatar : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"}}" alt="">
                                 <div class="media-body">
                                     <h5 class="mt-0">
                                         {{$reply->author}}
@@ -115,18 +115,16 @@
 
     @section('categories-section')
         <div class="card my-4">
-            <h5 class="card-header">Categories for this post</h5>
+            <h5 class="card-header">Categories</h5>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <ul class="list-unstyled mb-0">
-                            @foreach($post->categories as $category)
-                                <li>
-                                    <a href="{{route('category.show', $category->id)}}">{{$category->name}}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <ul class="list-unstyled mb-0 d-flex flex-row justify-content-around flex-wrap">
+                        @foreach($post->categories as $category)
+                            <li class="mx-3">
+                                <a href="{{route('category.show', $category->id)}}">{{$category->name}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

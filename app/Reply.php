@@ -11,6 +11,7 @@ class Reply extends Model
         'author',
         'email',
         'body',
+        'avatar',
         'is_active'
     ];
 

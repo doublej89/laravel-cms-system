@@ -13,9 +13,9 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getPostImageAttribute($value) {
-        return asset($value);
-    }
+//    public function getPostImageAttribute($value) {
+//        return asset($value);
+//    }
 
     public function comments() {
         return $this->hasMany(Comment::class);

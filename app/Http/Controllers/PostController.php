@@ -36,7 +36,10 @@ class PostController extends Controller
             'post_image' => 'file'
         ]);
         if (request('post_image')) {
-            $inputs['post_image'] = 'storage/'.request('post_image')->store('images');
+            $response = cloudinary()
+                ->upload(request()->file('post_image')->getRealPath())
+                ->getSecurePath();
+            $inputs['post_image'] = $response;
             $post->post_image = $inputs['post_image'];
         }
         $post->title = $inputs['title'];
