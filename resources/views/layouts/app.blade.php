@@ -77,5 +77,11 @@
             @yield('content')
         </main>
     </div>
+    <footer class="py-5 bg-dark" style="position: absolute; bottom: 0; width: 100%;">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Jawad Jahangir {{now()->year}}</p>
+        </div>
+        <!-- /.container -->
+    </footer>
 </body>
 </html>
