@@ -8,7 +8,7 @@
                     @method('PUT')
                     <input type="hidden" name="user_id" value="{{$user->id}}">
                     <div class="mb-4">
-                        <img class="img-profile rounded-circle" src="{{$user->avatar}}">
+                        <img height="200px" class="img-profile rounded-circle" src="{{$user->avatar}}">
                     </div>
                     <div class="form-group">
                         <input type="file" name="avatar">
