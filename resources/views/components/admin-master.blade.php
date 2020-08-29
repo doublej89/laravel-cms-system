@@ -299,7 +299,7 @@
                                     {{auth()->user()->name}}
                                 @endif
                             </span>
-                            <img class="img-profile rounded-circle" src="{{auth()->user()->avatar}}">
+                            <img class="img-profile rounded-circle" src="{{auth()->user()->avatar ? auth()->user()->avatar : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"}}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
