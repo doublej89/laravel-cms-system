@@ -46,14 +46,14 @@
                                 <td>{{$reply->body}}</td>
                                 <td>
                                     @if($reply->is_active == 1)
-                                        <form method="post" action="{{route('comments.update ', $reply->id)}}" enctype="multipart/form-data">
+                                        <form method="post" action="{{route('replies.update', $reply->id)}}" enctype="multipart/form-data">
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="is_active" value="0">
                                             <button type="submit" class="btn btn-dark">Disapprove</button>
                                         </form>
                                     @else
-                                        <form method="post" action="{{route('comments.update ', $reply->id)}}" enctype="multipart/form-data">
+                                        <form method="post" action="{{route('replies.update', $reply->id)}}" enctype="multipart/form-data">
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="is_active" value="1">
@@ -61,13 +61,15 @@
                                         </form>
                                     @endif
                                 </td>
-                                <td>
-                                    <form method="post" action="{{route('replies.destroy', $reply->id)}}" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td>
+{{--                                <td>--}}
+{{--                                    @if($reply->user->id == auth()->user()->id)--}}
+{{--                                    <form method="post" action="{{route('replies.destroy', $reply->id)}}" enctype="multipart/form-data">--}}
+{{--                                        @csrf--}}
+{{--                                        @method('DELETE')--}}
+{{--                                        <button type="submit" class="btn btn-danger">Delete</button>--}}
+{{--                                    </form>--}}
+{{--                                    @endif--}}
+{{--                                </td>--}}
                             </tr>
                         @endforeach
                         </tbody>

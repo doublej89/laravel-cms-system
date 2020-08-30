@@ -27,6 +27,7 @@
                             <th>Author</th>
                             <th>Author email</th>
                             <th>Body</th>
+                            <th>Replies</th>
                             <th>Post</th>
                         </tr>
                         </thead>
@@ -36,6 +37,7 @@
                             <th>Author</th>
                             <th>Author email</th>
                             <th>Body</th>
+                            <th>Replies</th>
                             <th>Post</th>
                         </tr>
                         </tfoot>
@@ -50,14 +52,14 @@
                                 <td><a href="{{route('post.show', $comment->post->id)}}">View Post</a></td>
                                 <td>
                                     @if($comment->is_active == 1)
-                                        <form method="post" action="{{route('comments.update ', $comment->id)}}" enctype="multipart/form-data">
+                                        <form method="post" action="{{route('comments.update', $comment->id)}}" enctype="multipart/form-data">
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="is_active" value="0">
                                             <button type="submit" class="btn btn-dark">Disapprove</button>
                                         </form>
                                     @else
-                                        <form method="post" action="{{route('comments.update ', $comment->id)}}" enctype="multipart/form-data">
+                                        <form method="post" action="{{route('comments.update', $comment->id)}}" enctype="multipart/form-data">
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="is_active" value="1">
@@ -65,13 +67,15 @@
                                         </form>
                                     @endif
                                 </td>
-                                <td>
-                                    <form method="post" action="{{route('comments.destroy', $comment->id)}}" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td>
+{{--                                <td>--}}
+{{--                                    @if($comment->user->id == auth()->user()->id)--}}
+{{--                                        <form method="post" action="{{route('comments.destroy', $comment->id)}}" enctype="multipart/form-data">--}}
+{{--                                            @csrf--}}
+{{--                                            @method('DELETE')--}}
+{{--                                            <button type="submit" class="btn btn-danger">Delete</button>--}}
+{{--                                        </form>--}}
+{{--                                    @endif--}}
+{{--                                </td>--}}
                             </tr>
                         @endforeach
                         </tbody>
