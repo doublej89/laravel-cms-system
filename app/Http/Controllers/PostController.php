@@ -39,8 +39,8 @@ class PostController extends Controller
             $response = cloudinary()
                 ->upload(request()->file('post_image')->getRealPath())
                 ->getSecurePath();
-            $inputs['post_image'] = $response;
-            $post->post_image = $inputs['post_image'];
+//            $inputs['post_image'] = $response;
+            $post->post_image = $response;
         }
         $post->title = $inputs['title'];
         $post->body = $inputs['body'];
