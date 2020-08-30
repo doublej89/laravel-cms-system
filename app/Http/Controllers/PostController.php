@@ -31,7 +31,7 @@ class PostController extends Controller
 
     public function update(Post $post) {
         $inputs = request()->validate([
-            'title' => 'required|min:8|max:255',
+            'title' => 'required|max:255',
             'body' => 'required',
             'post_image' => 'file'
         ]);
